@@ -1,5 +1,6 @@
 0.1
 ===
+* Consider using [Compojure](http://github.com/weavejester/compojure).
 * Parse and display pages from the file system, i.e. outside the WAR.
   If that isn't feasible, use a database instead.
 * Implement snippets that can be included from pages using a template
