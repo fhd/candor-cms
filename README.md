@@ -10,9 +10,9 @@ Planned features
 
 ### File-based
 
-There will be no data base, everything will be stored in files that
-can be conveniently edited with a text editor or managed by a version
-control system.
+There will be no database, everything will be stored in text files on
+the filesystem. Naturally, these files can be edited with a text
+editor or managed by a version control system.
 
 ### Web interface
 
@@ -22,8 +22,8 @@ simple web interface.
 ### Template language
 
 There will be a template language either based on something like
-[Mustache](http://mustache.github.com/) or
-[Radius](http://radiantcms.org/).
+[Mustache](http://mustache.github.com/) or a self-written one similar
+to Radius from [Radiant CMS](http://radiantcms.org/).
 
 ### Plugins
 
@@ -40,10 +40,11 @@ To run Candor CMS quickly in a local server, execute:
 
 	mvn jetty:run
 	
-And navigate to [http://localhost:8080/candor-cms](http://localhost:8080/candor-cms).
+And navigate to
+[http://localhost:8080/candor-cms](http://localhost:8080/candor-cms).
 
-To create a WAR archive that can be deployed on a Java application server like
-[Apache Tomcat](http://tomcat.apache.org/), execute:
+To create a WAR archive that can be deployed on a Java application
+server like [Apache Tomcat](http://tomcat.apache.org/), execute:
 
 	mvn package
 

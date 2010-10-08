@@ -3,11 +3,12 @@
 * Parse and display pages from the file system, i.e. outside the WAR.
   If that isn't feasible, use a database instead.
 * Implement snippets that can be included from pages using a template
-  system like [Mustache](http://mustache.github.com) or Radius from
-  [Radiant CMS](http://radiantcms.org).
+  system like [Mustache](http://mustache.github.com) or something like
+  Radius from [Radiant CMS](http://radiantcms.org).
 * Add a way to include articles from pages and snippets.
 * Implement Markdown support for articles (idenfity it based on the
   file extension like GitHub).
+* Implement sections.
 
 0.2
 ===
