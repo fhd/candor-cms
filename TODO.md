@@ -8,7 +8,6 @@
 * Add a way to include articles from pages and snippets.
 * Implement Markdown support for articles (idenfity it based on the
   file extension like GitHub).
-* Implement sections.
 
 0.2
 ===
