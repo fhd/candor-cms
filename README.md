@@ -43,11 +43,19 @@ To run Candor CMS quickly in a local server, execute:
 And navigate to
 [http://localhost:8080/candor-cms](http://localhost:8080/candor-cms).
 
+To run Candor CMS in a server started from a REPL, execute the following: 
+
+	mvn clojure:repl
+	(use 'ring.adapter.jetty)
+	(use 'com.github.fhd.candorcms.core)
+	(run-jetty example {:port 8080})
+
+Then navigate to [http://localhost:8080](http://localhost:8080).
+
 To create a WAR archive that can be deployed on a Java application
 server like [Apache Tomcat](http://tomcat.apache.org/), execute:
 
 	mvn package
-
 
 License
 -------
