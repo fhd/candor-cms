@@ -6,7 +6,7 @@
   system like [Mustache](http://mustache.github.com) or something like
   Radius from [Radiant CMS](http://radiantcms.org).
 * Add a way to include articles from pages and snippets.
-* Implement Markdown support for articles (idenfity it based on the
+* Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
 
 0.2
