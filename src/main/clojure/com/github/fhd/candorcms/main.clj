@@ -1,4 +1,4 @@
-(ns com.github.fhd.candorcms.core
+(ns com.github.fhd.candorcms.main
   (:use compojure.core
 	ring.util.servlet
 	hiccup.core)

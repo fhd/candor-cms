@@ -6,11 +6,11 @@
          version="2.5">
     <display-name>Candor CMS</display-name>
     <servlet>
-        <servlet-name>core</servlet-name>
-        <servlet-class>com.github.fhd.candorcms.core</servlet-class>
+        <servlet-name>main</servlet-name>
+        <servlet-class>com.github.fhd.candorcms.main</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>core</servlet-name>
+        <servlet-name>main</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>
