@@ -47,7 +47,7 @@ To run Candor CMS in a server started from a REPL, execute the following:
 
 	mvn clojure:repl
 	(use 'ring.adapter.jetty)
-	(use 'com.github.fhd.candorcms.core)
+	(use 'com.github.fhd.candorcms.main)
 	(run-jetty example {:port 8080})
 
 Then navigate to [http://localhost:8080](http://localhost:8080).
