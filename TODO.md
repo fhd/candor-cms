@@ -1,9 +1,10 @@
 0.1
 ===
-* Implement snippets that can be included from pages using a template
-  system like [Mustache](http://mustache.github.com) or something like
-  Radius from [Radiant CMS](http://radiantcms.org).
-* Add a way to include articles from pages and snippets.
+* Implement templates that can be included from pages, either using a
+  general-purpose template system like
+  [Mustache](http://mustache.github.com) or something self-written
+  like Radius from [Radiant CMS](http://radiantcms.org).
+* Add a way to include articles from pages and templates.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
 * Add doc strings
@@ -13,7 +14,7 @@
 * Look at [HtmlUnit](http://htmlunit.sourceforge.net/) and see if it
   makes sense for test-driving the web interface.
 * Implement a basic web interface to create, list, edit and delete
-  articles, pages and snippets.
+  articles, pages and templates.
 * Implement a StackOverflow-like preview for articles.
 * Implement an optional WYSIWYG HTML editor for articles.
 
