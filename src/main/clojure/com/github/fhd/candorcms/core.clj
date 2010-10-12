@@ -9,7 +9,7 @@
 (defn load-properties
   "Loads all properties from the specified file."
   [file]
-  (doto (java.util.Properties.) ;; TODO: Try getting rid of the doto
+  (doto (java.util.Properties.)
     (.load (-> (Thread/currentThread)
 	       (.getContextClassLoader)
 	       (.getResourceAsStream file)))))
