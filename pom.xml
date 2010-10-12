@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -77,7 +78,18 @@
                 <version>6.1.25</version>
                 <configuration>
                     <contextPath>/</contextPath>
+                    <webAppConfig>
+                        <extraClasspath>src/main/clojure</extraClasspath>
+                    </webAppConfig>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <scanTargetPatterns>
+                        <scanTargetPattern>
+                            <directory>src/main/clojure</directory>
+                            <includes>
+                                <include>**/*.clj</include>
+                            </includes>
+                        </scanTargetPattern>
+                    </scanTargetPatterns>
                 </configuration>
             </plugin>
         </plugins>
