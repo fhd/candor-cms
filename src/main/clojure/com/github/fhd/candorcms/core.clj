@@ -18,31 +18,39 @@
 	       (.getContextClassLoader)
 	       (.getResourceAsStream file)))))
 
+(defn parse-header
+  "Parses the page header format into a map."
+  [header]
+  (into {} (for [line (.split header "\n")]
+	     (if (not (empty? line))
+	       (let [key-value (.split line "=")]
+		 [(keyword (aget key-value 0))
+		  (aget key-value 1)])))))
+
 (defn load-pages
   "Loads all available pages."
   [site-dir]
-  (let [pages-dir (str site-dir "/pages")
-	dir (java.io.File. pages-dir)
-	files (.listFiles dir)]
-    (into {} (for [file files]
+  (let [pages-dir (str site-dir "/pages")]
+    (into {} (for [file (.listFiles (java.io.File. pages-dir))]
 	       (let [name (.getName file)
 		     simple-name (.substring name 0 (.indexOf name "."))
-		     content (slurp (str pages-dir "/" name))]
+		     content (slurp (str pages-dir "/" name))
+		     header-end (.indexOf content "-->")
+		     header (parse-header (.substring content 4 header-end))
+		     body (.trim (.substring content (+ header-end 3)))]
 		 [(keyword simple-name)
 		  (struct page
 			  (str "/" (if (not (= simple-name index-page-name))
 				     simple-name))
-			  "Home" ;; TODO: Read from the header.
-			  "layout" ;; TODO: Read from the header.
-			  content)])))))
+			  (:title header)
+			  (:template header)
+			  body)])))))
 
 (defn load-templates
   "Loads all available templates."
   [site-dir]
-  (let [templates-dir (str site-dir "/templates")
-	dir (java.io.File. templates-dir)
-	files (.listFiles dir)]
-    (into {} (for [file files]
+  (let [templates-dir (str site-dir "/templates")]
+    (into {} (for [file (.listFiles (java.io.File. templates-dir))]
 	       (let [name (.getName file)
 		     simple-name (.substring name 0 (.indexOf name "."))
 		     content (slurp (str templates-dir "/" name))]
