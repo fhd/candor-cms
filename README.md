@@ -7,25 +7,27 @@ It's still in early development. Have a look at the
 [demo](http://github.com/fhd/candor-cms-demo) to see its present
 capabilities.
 
-Planned features
-----------------
+Features
+--------
 
 ### File-based
 
-There will be no database, everything will be stored in text files on
-the filesystem. Naturally, these files can be edited with a text
-editor or managed by a version control system.
+There is no database, everything is stored in text files on the
+filesystem. Naturally, these can be edited with a text editor or
+managed by a version control system.
+
+### Established template language
+
+Candor CMS uses a template language based on
+[Mustache](http://mustache.github.com/) - no weird XML dialect.
+
+Planned features
+----------------
 
 ### Web interface
 
 The full functionality of the CMS system will be availble through a
 simple web interface.
-
-### Template language
-
-There will be a template language either based on something like
-[Mustache](http://mustache.github.com/) or a self-written one like
-Radius from [Radiant CMS](http://radiantcms.org/).
 
 ### Plugins
 
@@ -48,9 +50,7 @@ by their basename (e.g. http://example.org/index).
 
 ### Templates
 
-*Not yet implemented.*
-
-Templates will provide a way to reuse code among pages.
+Templates provide a way to reuse code among pages.
 
 ### Articles
 
