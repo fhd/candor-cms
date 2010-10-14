@@ -7,6 +7,8 @@ It's still in early development. Have a look at the
 [demo](http://github.com/fhd/candor-cms-demo) to see its present
 capabilities.
 
+[![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/72693/Candor-CMS)
+
 Features
 --------
 
