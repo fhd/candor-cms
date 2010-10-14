@@ -19,7 +19,7 @@ Features
 ### File-based
 
 There is no database, everything is stored in text files on the
-filesystem. Naturally, these can be edited with a text editor or
+file system. Naturally, these can be edited with a text editor or
 managed by a version control system.
 
 ### Established template language
