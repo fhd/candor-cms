@@ -1,28 +1,22 @@
 0.1
 ===
-* Implement templates that can be included from pages, either using a
-  general-purpose template system like
-  [Mustache](http://mustache.github.com) or something self-written
-  like Radius from [Radiant CMS](http://radiantcms.org).
+* Implement templates using [mustache](http://mustache.github.com).
 * Add a way to include articles from pages and templates.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
-* Add doc strings.
 
 0.2
 ===
-* Look at [HtmlUnit](http://htmlunit.sourceforge.net/) and see if it
-  makes sense for test-driving the web interface.
 * Implement a basic web interface to create, list, edit and delete
   articles, pages and templates.
-* Implement a StackOverflow-like preview for articles.
-* Implement an optional WYSIWYG HTML editor for articles.
+* Implement a StackOverflow-like live preview for articles.
+* Add an optional WYSIWYG HTML editor for articles.
 
 0.3
 ===
-* Make it possible to add functionality using Clojure scripts.
-* Add caching.
+* Make it possible to add functionality using Clojure.
 * Create an extension to display an image gallery.
+* Make it possible to add functionality using Groovy.
 
 Ideas
 =====
@@ -34,4 +28,5 @@ Ideas
 * Set up a demo at Google App Engine.
 * Add support for additional markup languages (Textile, OrgMode, ...)
 * Add syntax highlighting to the web interface.
-
+* Improve performance, add caching etc.
+* Add support for more JVM languages, e.g. Scala, Jython or JRuby.

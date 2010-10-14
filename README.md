@@ -7,6 +7,10 @@ It's still in early development. Have a look at the
 [demo](http://github.com/fhd/candor-cms-demo) to see its present
 capabilities.
 
+Candor CMS is heavily inspired by [Radiant](http://radiantcms.org/)
+and [Textpattern](http://textpattern.com/), two simple and powerful
+CMS systems that just didn't quite meet my needs.
+
 [![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/72693/Candor-CMS)
 
 Features
@@ -20,21 +24,24 @@ managed by a version control system.
 
 ### Established template language
 
-Candor CMS uses a template language based on
-[Mustache](http://mustache.github.com/) - no weird XML dialect.
+Candor CMS uses the [mustache](http://mustache.github.com/) template
+language - no weird XML dialect.
 
 Planned features
 ----------------
 
 ### Web interface
 
-The full functionality of the CMS system will be availble through a
+The full functionality of the CMS system will be available through a
 simple web interface.
 
-### Plugins
+### Polyglot extensions
 
-It will be possible to extend Candor CMS with additional functionality
-by writing Clojure scripts.
+I believe in choice, thus it will be possible to extend Candor CMS
+with additional functionality using several dynamic JVM languages. The
+first stable release will at least support Clojure and Groovy, but in
+the future there will probably be support for Scala, Jython, JRuby
+etc.
 
 Concepts
 --------
@@ -52,7 +59,9 @@ by their basename (e.g. http://example.org/index).
 
 ### Templates
 
-Templates provide a way to reuse code among pages.
+All files in the *templates* directory provide a way to reuse code
+among pages using the [mustache](http://mustache.github.com/) template
+language.
 
 ### Articles
 
@@ -64,6 +73,12 @@ able to list and display articles.
 
 Building
 --------
+
+Candor CMS sites are stored in the file system, not within the web
+application archive or a database, so the first thing you need to do
+is configure the absolute path to your site in the file
+*src/main/resources/candorcms.properties*. If you don't have a site
+yet, download the [demo](http://github.com/fhd/candor-cms-demo).
 
 In order to build and run Candor CMS, you have to get
 [Apache Maven](http://maven.apache.org/).
