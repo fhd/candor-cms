@@ -4,6 +4,7 @@
 * Add a way to include articles from pages and templates.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
+* Add RSS/Atom support (should be possible with pages/templates/articles).
 
 0.2
 ===
@@ -20,7 +21,6 @@
 
 Ideas
 =====
-* Add RSS/Atom support.
 * Add multi-user support.
 * Add XML-RPC support.
 * Add Git support to the web interface.
