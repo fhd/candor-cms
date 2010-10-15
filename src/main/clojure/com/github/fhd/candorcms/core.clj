@@ -2,7 +2,8 @@
   "The core service of Candor CMS, responsible for retrieving the pages."
   (:use compojure.core
         ring.util.servlet
-        hiccup.core)
+        hiccup.core
+        com.github.fhd.candorcms.mustache)
   (:gen-class
    :extends javax.servlet.http.HttpServlet))
 
@@ -58,11 +59,6 @@
                      content (slurp (str templates-dir "/" name))]
                  [(keyword simple-name) content])))))
 
-(defn expand-template
-  "Expands (i.e. applies) the template of the supplied page."
-  [template data]
-  (:content data)) ;; TODO: Actually apply the template.
-
 (defn get-page
   "Returns the contents of the supplied page."
   [page-name]
@@ -77,11 +73,12 @@
                " inside the web application archive."]]])
       (let [pages (load-pages site-dir)
             page ((keyword page-name) pages)
-            templates (load-templates site-dir)]
-        (expand-template (:content ((keyword (:template page)) templates))
-                         {:title (:title page)
-                          :pages pages
-                          :content (:content page)})))))
+            templates (load-templates site-dir)
+            template ((keyword (:template page)) templates)]
+        (expand template
+                {:title (:title page)
+                 :pages pages
+                 :content (:content page)})))))
 
 (defroutes all
   (GET "/" [] (get-page index-page-name))
