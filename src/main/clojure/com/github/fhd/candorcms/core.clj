@@ -62,7 +62,7 @@
                  [(keyword simple-name) content])))))
 
 (defn get-page
-  "Returns the contents of the supplied page."
+  "Returns the contents of the page."
   [page-name]
   (let [site-dir (.getProperty (load-properties "candorcms.properties")
                                "site.dir")]
