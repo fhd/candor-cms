@@ -3,9 +3,10 @@
         com.github.fhd.candorcms.mustache))
 
 ;; TODO: Write tests for the following
-;; - Lists
 ;; - Escaped HTML
 ;; - Unescaped HTML
+;; - Lists
+;; - Functions
 
-(deftest test-expand-simple
-  (is (= "Hello, Felix" (expand "Hello, {{name}}" {:name "Felix"}))))
+(deftest test-render-simple
+  (is (= "Hello, Felix" (render "Hello, {{name}}" {:name "Felix"}))))
