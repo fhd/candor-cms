@@ -4,6 +4,8 @@
         ring.util.servlet
         hiccup.core
         com.github.fhd.candorcms.mustache)
+  (:import (java.util Properties)
+           (java.io File))
   (:gen-class
    :extends javax.servlet.http.HttpServlet))
 
@@ -11,15 +13,15 @@
 
 (defstruct page :url :title :template :content)
 
-(defn load-properties
+(defn- load-properties
   "Loads all properties from the specified file."
   [file]
-  (doto (java.util.Properties.)
+  (doto (Properties.)
     (.load (-> (Thread/currentThread)
                (.getContextClassLoader)
                (.getResourceAsStream file)))))
 
-(defn parse-header
+(defn- parse-header
   "Parses the page header format into a map."
   [header]
   (into {} (for [line (.split header "\n")]
@@ -29,11 +31,11 @@
                      value (aget key-value 1)]
                  [(keyword key) value])))))
 
-(defn load-pages
+(defn- load-pages
   "Loads all available pages."
   [site-dir]
   (let [pages-dir (str site-dir "/pages")]
-    (into {} (for [file (.listFiles (java.io.File. pages-dir))]
+    (into {} (for [file (.listFiles (File. pages-dir))]
                (let [name (.getName file)
                      simple-name (.substring name 0 (.indexOf name "."))
                      url (str "/" (if (not (= simple-name index-page-name))
@@ -49,11 +51,11 @@
                           (:template header)
                           body)])))))
 
-(defn load-templates
+(defn- load-templates
   "Loads all available templates."
   [site-dir]
   (let [templates-dir (str site-dir "/templates")]
-    (into {} (for [file (.listFiles (java.io.File. templates-dir))]
+    (into {} (for [file (.listFiles (File. templates-dir))]
                (let [name (.getName file)
                      simple-name (.substring name 0 (.indexOf name "."))
                      content (slurp (str templates-dir "/" name))]
@@ -75,7 +77,7 @@
             page ((keyword page-name) pages)
             templates (load-templates site-dir)
             template ((keyword (:template page)) templates)]
-        (expand template
+        (render template
                 {:title (:title page)
                  :pages pages
                  :content (:content page)})))))
