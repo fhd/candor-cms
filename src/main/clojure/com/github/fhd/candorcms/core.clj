@@ -78,8 +78,8 @@
                  :pages (vec (vals pages))
                  :content (:content page)})))))
 
-(defroutes all
+(defroutes main-routes
   (GET "/" [] (get-page index-page-name))
   (GET "/:page" [page] (get-page page)))
 
-(defservice all)
+(defservice main-routes)
