@@ -3,7 +3,7 @@
   (:use compojure.core
         ring.util.servlet
         hiccup.core
-        com.github.fhd.candorcms.mustache)
+        com.github.fhd.clostache.parser)
   (:import (java.util Properties)
            (java.io File))
   (:gen-class
