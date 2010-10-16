@@ -3,10 +3,10 @@
   (:import (java.io BufferedReader StringReader)))
 
 (defn- replace-all
-  "Applies all replacements from the replacement list on the string."
+  "Applies all replacements from the replacement list to the string."
   [string replacements]
-  (reduce (fn [str [from to]]
-            (.replaceAll str from to)) string replacements))
+  (reduce (fn [string [from to]]
+            (.replaceAll string from to)) string replacements))
 
 (defn- escape
   "Replaces angle brackets with the respective HTML entities."
