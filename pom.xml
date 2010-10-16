@@ -8,7 +8,7 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Candor CMS</name>
-    <description>A simple CMS system written in Clojure.</description>
+    <description>A simple CMS system written in Clojure</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
