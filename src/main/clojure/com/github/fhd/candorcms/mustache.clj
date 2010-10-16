@@ -1,6 +1,8 @@
 (ns com.github.fhd.candorcms.mustache
-  "A parser for the Mustache template language."
-  (:import (java.io BufferedReader StringReader)))
+  "A parser for the mustache template language."
+  (:use [clojure.contrib.string :only (map-str)]))
+
+(defstruct section :name :body :start :end)
 
 (defn- replace-all
   "Applies all replacements from the replacement list to the string."
@@ -8,24 +10,48 @@
   (reduce (fn [string [from to]]
             (.replaceAll string from to)) string replacements))
 
-(defn- escape
+(defn- escape-html
   "Replaces angle brackets with the respective HTML entities."
   [string]
   (replace-all string [["<" "&lt;"] [">" "&gt;"]]))
 
-(defn- create-replacements
-  "Creates pairs of replacements from the data."
+(defn- create-variable-replacements
+  "Creates pairs of variable replacements from the data."
   [data]
   (apply concat
          (for [k (keys data)]
-           (let [tag-name (name k)
-                 value (k data)]
-             (if (instance? String value)
-               [[(str "\\{\\{\\{" tag-name "\\}\\}\\}") value]
-                [(str "\\{\\{" tag-name "\\}\\}") (escape value)]])))))
+           (let [var-name (name k)
+                 var-value (k data)]
+             (if (instance? String var-value)
+               [[(str "\\{\\{\\{" var-name "\\}\\}\\}") var-value]
+                [(str "\\{\\{" var-name "\\}\\}")
+                 (escape-html var-value)]])))))
+
+(defn- extract-section
+  "Extracts the outer section from the template."
+  [template]
+  (let [start (.indexOf template "{{#")
+        end-tag (.indexOf template "{{/" start)
+        end (+ (.indexOf template "}}" end-tag) 2)]
+    (if (or (= start -1) (= end 1))
+      nil
+      (let [section-str (.substring template start end)
+            body-start (+ (.indexOf section-str "}}") 2)
+            body-end (.lastIndexOf section-str "{{")
+            body (.substring section-str body-start body-end)
+            section-name (.substring section-str 3 (- body-start 2))]
+        (struct section section-name body start end)))))
 
 (defn render
   "Renders the template with the data."
   [template data]
-  (let [replacements (create-replacements data)]
-    (replace-all template replacements)))
+  (let [replacements (create-variable-replacements data)
+        section (extract-section template)]
+    (if (nil? section)
+      (replace-all template replacements)
+      (let [before (.substring template 0 (:start section))
+            after (.substring template (:end section))
+            section-data ((keyword (:name section)) data)]
+        (str (replace-all before replacements)
+          (map-str (fn [m] (render (:body section) m)) section-data)
+          (replace-all after replacements))))))
