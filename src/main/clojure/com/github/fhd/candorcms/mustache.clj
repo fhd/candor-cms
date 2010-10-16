@@ -27,11 +27,5 @@
 (defn render
   "Renders the template with the data."
   [template data]
-  (let [reader (BufferedReader. (StringReader. template))
-        builder (StringBuilder.)
-        lines (line-seq reader)
-        replacements (create-replacements data)]
-    (doseq [line lines]
-      (.append builder (str (replace-all line replacements)
-                            (if (not (= line (last lines))) "\n"))))
-    (.toString builder)))
+  (let [replacements (create-replacements data)]
+    (replace-all template replacements)))
