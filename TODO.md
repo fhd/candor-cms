@@ -1,6 +1,6 @@
 0.1
 ===
-* Add a way to include articles from pages and templates.
+* Implement individual pages for articles.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
 * Add RSS/Atom support (should be possible with pages/templates/articles).

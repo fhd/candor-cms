@@ -65,11 +65,10 @@ language.
 
 ### Articles
 
-*Not yet implemented.*
-
-While pages and templates fulfil technical purposes, articles will
-hold the actual content of the website. Pages and templates will be
-able to list and display articles.
+All files in the *articles* directory provide a way to add additional
+content to pages. Files are organised into subdirectories, which is
+named like the basename of the page where the contained articles
+should appear. Pages and templates can list and display articles.
 
 Building
 --------
