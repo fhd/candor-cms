@@ -2,7 +2,7 @@
   "A parser for the mustache template language."
   (:use [clojure.contrib.string :only (map-str)]))
 
-(defstruct section :name :body :start :end)
+(defrecord Section [name body start end])
 
 (defn- replace-all
   "Applies all replacements from the replacement list to the string."
@@ -35,12 +35,12 @@
         end (+ (.indexOf template "}}" end-tag) 2)]
     (if (or (= start -1) (= end 1))
       nil
-      (let [section-str (.substring template start end)
-            body-start (+ (.indexOf section-str "}}") 2)
-            body-end (.lastIndexOf section-str "{{")
-            body (.substring section-str body-start body-end)
-            section-name (.substring section-str 3 (- body-start 2))]
-        (struct section section-name body start end)))))
+      (let [section (.substring template start end)
+            body-start (+ (.indexOf section "}}") 2)
+            body-end (.lastIndexOf section "{{")
+            body (.substring section body-start body-end)
+            section-name (.substring section 3 (- body-start 2))]
+        (Section. section-name body start end)))))
 
 (defn render
   "Renders the template with the data."
@@ -53,5 +53,5 @@
             after (.substring template (:end section))
             section-data ((keyword (:name section)) data)]
         (str (replace-all before replacements)
-          (map-str (fn [m] (render (:body section) m)) section-data)
-          (replace-all after replacements))))))
+             (map-str (fn [m] (render (:body section) m)) section-data)
+             (replace-all after replacements))))))

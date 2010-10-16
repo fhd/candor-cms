@@ -1,6 +1,5 @@
 0.1
 ===
-* Implement templates using [mustache](http://mustache.github.com).
 * Add a way to include articles from pages and templates.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).

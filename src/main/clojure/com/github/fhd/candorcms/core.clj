@@ -11,7 +11,7 @@
 
 (def index-page-name "index")
 
-(defstruct page :url :title :template :content)
+(defrecord Page [url title template content])
 
 (defn- load-properties
   "Loads all properties from the specified file."
@@ -45,11 +45,7 @@
                      header (parse-header (.substring content 4 header-end))
                      body (.trim (.substring content (+ header-end 3)))]
                  [(keyword simple-name)
-                  (struct page
-                          url
-                          (:title header)
-                          (:template header)
-                          body)])))))
+                  (Page. url (:title header) (:template header) body)])))))
 
 (defn- load-templates
   "Loads all available templates."
@@ -79,7 +75,7 @@
             template ((keyword (:template page)) templates)]
         (render template
                 {:title (:title page)
-                 :pages pages
+                 :pages (vec (vals pages))
                  :content (:content page)})))))
 
 (defroutes all
