@@ -12,7 +12,7 @@
 (def index-page-name "index")
 
 (defrecord Page [url title template content])
-(defrecord Article [title content])
+(defrecord Article [url title content])
 (defrecord Header [data end])
 
 (defn- load-properties
@@ -72,45 +72,66 @@
   "Loads all articles for the page."
   [site-dir page]
   (let [articles-dir (str site-dir "/articles/" page)]
-    (vec (for [file (.listFiles (File. articles-dir))]
-           (let [name (.getName file)
-                 content (slurp (str articles-dir "/" name))
-                 header (extract-header content)
-                 body (.trim (.substring content (:end header)))]
-             (Article. (:title (:data header)) body))))))
+    (into {} (for [file (.listFiles (File. articles-dir))]
+               (let [name (.getName file)
+                     simple-name (.substring name 0 (.indexOf name "."))
+                     url (str "/" page "/" simple-name)
+                     content (slurp (str articles-dir "/" name))
+                     header (extract-header content)
+                     body (.trim (.substring content (:end header)))]
+                 [(keyword simple-name)
+                  (Article. url (:title (:data header)) body)])))))
+
+(defn- no-site-configured
+  "Returns an error page explaining that no site was configured."
+  []
+  (html [:html
+         [:head [:title "Candor CMS - No site configured"]]
+         [:body
+          [:p "No site has been configured for Candor CMS."]
+          [:p "Please edit the file " [:em "candorcms.properties"]
+           " inside the web application archive."]]]))
+
+(defn- page-not-found
+  "Returns the standard 404 page."
+  []
+  {:status 404
+   :body (html [:html
+                [:head [:title "Candor CMS - Page not found"]]
+                [:body
+                 [:h1 "Page not found"]
+                 [:p "Move along, nothing to see here!"]]])})
 
 (defn get-page
-  "Returns the contents of the page."
-  [page-name]
+  "Returns the contents of the page. If article-name is given, only that single
+article is shown."
+  [page-name & article-name]
   (let [site-dir (.getProperty (load-properties "candorcms.properties")
                                "site.dir")]
     (if (empty? site-dir)
-      (html [:html
-             [:head [:title "Candor CMS - No site configured"]]
-             [:body
-              [:p "No site has been configured for Candor CMS."]
-              [:p "Please edit the file " [:em "candorcms.properties"]
-               " inside the web application archive."]]])
+      (no-site-configured)
       (let [pages (load-pages site-dir)
             page ((keyword page-name) pages)]
         (if (nil? page)
-          {:status 404
-           :body (html [:html
-                        [:head [:title "Candor CMS - Page not found"]]
-                        [:body
-                         [:h1 "Page not found"]
-                         [:p "Move along, nothing to see here!"]]])}
+          (page-not-found)
           (let [templates (load-templates site-dir)
                 template ((keyword (:template page)) templates)
                 articles (load-articles site-dir page-name)
-                data {:pages (vec (vals pages))
-                      :articles articles
-                      :title (:title page)}
-                content (render (:content page) data)]
-            (render template (conj data {:content content}))))))))
+                selected-articles (if (nil? article-name)
+                                    (vec (vals articles))
+                                    [((keyword (first article-name))
+                                      articles)])]
+            (if (nil? (first selected-articles))
+              (page-not-found)
+              (let [data {:pages (vec (vals pages))
+                          :articles selected-articles
+                          :title (:title page)}
+                    content (render (:content page) data)]
+                (render template (conj data {:content content}))))))))))
 
 (defroutes main-routes
   (GET "/" [] (get-page index-page-name))
-  (GET "/:page" [page] (get-page page)))
+  (GET "/:page" [page] (get-page page))
+  (GET "/:page/:article" [page article] (get-page page article)))
 
 (defservice main-routes)

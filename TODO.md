@@ -1,8 +1,11 @@
 0.1
 ===
-* Implement individual pages for articles.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
+* Deal with trailing slashes in URLs.
+* Add article pagination.
+* Add article archives.
+* Make it possible to define custom 404 pages.
 
 0.2
 ===
@@ -19,10 +22,6 @@
 
 Ideas
 =====
-* Add article pagination.
-* Add article archives.
-* Make it possible to define custom 404 pages.
-* Add RSS/Atom support (should be possible with pages/templates/articles).
 * Add multi-user support.
 * Add XML-RPC support.
 * Add Git support to the web interface.
