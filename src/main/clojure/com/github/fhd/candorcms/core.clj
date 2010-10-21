@@ -92,15 +92,22 @@
               [:p "Please edit the file " [:em "candorcms.properties"]
                " inside the web application archive."]]])
       (let [pages (load-pages site-dir)
-            page ((keyword page-name) pages)
-            templates (load-templates site-dir)
-            template ((keyword (:template page)) templates)
-            articles (load-articles site-dir page-name)
-            data {:pages (vec (vals pages))
-                  :articles articles
-                  :title (:title page)}
-            content (render (:content page) data)]
-        (render template (conj data {:content content}))))))
+            page ((keyword page-name) pages)]
+        (if (nil? page)
+          {:status 404
+           :body (html [:html
+                        [:head [:title "Candor CMS - Page not found"]]
+                        [:body
+                         [:h1 "Page not found"]
+                         [:p "Move along, nothing to see here!"]]])}
+          (let [templates (load-templates site-dir)
+                template ((keyword (:template page)) templates)
+                articles (load-articles site-dir page-name)
+                data {:pages (vec (vals pages))
+                      :articles articles
+                      :title (:title page)}
+                content (render (:content page) data)]
+            (render template (conj data {:content content}))))))))
 
 (defroutes main-routes
   (GET "/" [] (get-page index-page-name))

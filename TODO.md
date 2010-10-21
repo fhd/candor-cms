@@ -21,6 +21,7 @@ Ideas
 =====
 * Add article pagination.
 * Add article archives.
+* Make it possible to define custom 404 pages.
 * Add RSS/Atom support (should be possible with pages/templates/articles).
 * Add multi-user support.
 * Add XML-RPC support.
