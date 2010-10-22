@@ -9,7 +9,7 @@ capabilities.
 
 Candor CMS is heavily inspired by [Radiant](http://radiantcms.org/)
 and [Textpattern](http://textpattern.com/), two simple and powerful
-CMS systems that just didn't quite meet my needs.
+CMSs that just didn't quite meet my needs.
 
 [![Flattr this](http://api.flattr.com/button/button-compact-static-100x17.png "Flattr this")](http://flattr.com/thing/72693/Candor-CMS)
 
