@@ -1,7 +1,7 @@
 Candor CMS
 ==========
 
-A simple CMS system written in Clojure.
+A simple web content management system.
 
 It's still in early development. Have a look at the
 [demo](http://github.com/fhd/candor-cms-demo) to see its present
