@@ -1,6 +1,5 @@
 0.1
 ===
-* Move page/article/template retrieval to a separate namespace.
 * Make the page/article comment header optional and define default values.
 * Sort articles on pages by date.
 * Implement Markdown support for articles (identify it based on the
