@@ -7,7 +7,7 @@
     <display-name>Candor CMS</display-name>
     <servlet>
         <servlet-name>core</servlet-name>
-        <servlet-class>com.github.fhd.candorcms.core</servlet-class>
+        <servlet-class>candorcms.core</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>core</servlet-name>

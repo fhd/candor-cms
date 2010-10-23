@@ -1,10 +1,10 @@
-(ns com.github.fhd.candorcms.core
+(ns candorcms.core
   "The core service of Candor CMS, responsible for retrieving the pages."
   (:use compojure.core
         ring.util.servlet
         hiccup.core
         com.github.fhd.clostache.parser
-        com.github.fhd.candorcms.storage)
+        candorcms.storage)
   (:import java.util.Properties)
   (:gen-class
    :extends javax.servlet.http.HttpServlet))
