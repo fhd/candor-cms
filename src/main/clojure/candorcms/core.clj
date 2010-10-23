@@ -3,7 +3,7 @@
   (:use compojure.core
         ring.util.servlet
         hiccup.core
-        com.github.fhd.clostache.parser
+        clostache.parser
         candorcms.storage)
   (:import java.util.Properties)
   (:gen-class
