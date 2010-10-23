@@ -1,4 +1,5 @@
 (ns com.github.fhd.candorcms.storage
+  "Retrieval of site files stored on the filesystem."
   (:import java.io.File))
 
 (defn- parse-header
