@@ -56,7 +56,8 @@ article is shown."
                                     (vec (vals articles))
                                     [((keyword (first article-name))
                                       articles)])]
-            (if (nil? (first selected-articles))
+            (if (and (= (count selected-articles) 1)
+                     (nil? (first selected-articles)))
               (page-not-found)
               (let [data {:pages (vec (vals pages))
                           :articles selected-articles
