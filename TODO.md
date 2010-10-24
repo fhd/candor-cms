@@ -1,7 +1,6 @@
 0.1
 ===
 * Make the page/article comment header optional and define default values.
-* Sort articles on pages by date.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
 * Deal with trailing slashes in URLs.

@@ -4,6 +4,7 @@
         ring.util.servlet
         hiccup.core
         clostache.parser
+        candorcms.settings
         candorcms.storage)
   (:import java.util.Properties)
   (:gen-class
@@ -53,7 +54,7 @@ article is shown."
                 template ((keyword (:template page)) templates)
                 articles (load-articles site-dir page-name)
                 selected-articles (if (nil? article-name)
-                                    (vec (vals articles))
+                                    (vec (sort-by :date (vals articles)))
                                     [((keyword (first article-name))
                                       articles)])]
             (if (and (= (count selected-articles) 1)
@@ -66,7 +67,7 @@ article is shown."
                 (render template (conj data {:content content}))))))))))
 
 (defroutes main-routes
-  (GET "/" [] (get-page "index"))
+  (GET "/" [] (get-page index-page))
   (GET "/:page" [page] (get-page page))
   (GET "/:page/:article" [page article] (get-page page article)))
 

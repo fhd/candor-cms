@@ -1,6 +1,8 @@
 (ns candorcms.storage
   "Retrieval of site files stored on the filesystem."
-  (:import java.io.File))
+  (:use candorcms.settings)
+  (:import java.io.File
+           java.text.SimpleDateFormat))
 
 (defn- parse-header
   "Parses the header section format into a map."
@@ -19,8 +21,8 @@
   "Extracts the header section from the content."
   [content]
   (let [end (.indexOf content "-->")
-        header (parse-header (.substring content 4 end))]
-    (Header. header (+ end 3))))
+        data (parse-header (.substring content 4 end))]
+    (Header. data (+ end 3))))
 
 (defrecord Page
   [url title template content])
@@ -32,7 +34,7 @@
     (into {} (for [file (.listFiles (File. pages-dir))]
                (let [name (.getName file)
                      simple-name (.substring name 0 (.indexOf name "."))
-                     url (str "/" (if (not (= simple-name "index"))
+                     url (str "/" (if (not (= simple-name index-page))
                                     simple-name))
                      content (slurp (str pages-dir "/" name))
                      header (extract-header content)
@@ -54,7 +56,7 @@
                  [(keyword simple-name) content])))))
 
 (defrecord Article
-  [url title content])
+  [url title date content])
 
 (defn load-articles
   "Loads all articles for the page."
@@ -66,6 +68,12 @@
                      url (str "/" page "/" simple-name)
                      content (slurp (str articles-dir "/" name))
                      header (extract-header content)
+                     date (.lastModified file)
+                     format (SimpleDateFormat. date-format)
+                     date-string (.format format date)
                      body (.trim (.substring content (:end header)))]
                  [(keyword simple-name)
-                  (Article. url (:title (:data header)) body)])))))
+                  (Article. url
+                            (:title (:data header))
+                            date-string
+                            body)])))))
