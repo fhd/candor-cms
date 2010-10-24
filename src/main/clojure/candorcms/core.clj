@@ -4,7 +4,6 @@
         ring.util.servlet
         hiccup.core
         clostache.parser
-        candorcms.settings
         candorcms.storage)
   (:import java.util.Properties)
   (:gen-class
@@ -42,8 +41,9 @@
   "Returns the contents of the page. If article-name is given, only that single
 article is shown."
   [page-name & article-name]
-  (let [site-dir (.getProperty (load-properties "candorcms.properties")
-                               "site.dir")]
+  (let [properties (load-properties "candorcms.properties")
+        site-dir (.getProperty properties "site.dir")
+        date-format (.getProperty properties "date.format")]
     (if (empty? site-dir)
       (no-site-configured)
       (let [pages (load-pages site-dir)
@@ -52,7 +52,7 @@ article is shown."
           (page-not-found)
           (let [templates (load-templates site-dir)
                 template ((keyword (:template page)) templates)
-                articles (load-articles site-dir page-name)
+                articles (load-articles site-dir page-name date-format)
                 selected-articles (if (nil? article-name)
                                     (vec (sort-by :date (vals articles)))
                                     [((keyword (first article-name))
@@ -67,7 +67,7 @@ article is shown."
                 (render template (conj data {:content content}))))))))))
 
 (defroutes main-routes
-  (GET "/" [] (get-page index-page))
+  (GET "/" [] (get-page "index"))
   (GET "/:page" [page] (get-page page))
   (GET "/:page/:article" [page article] (get-page page article)))
 

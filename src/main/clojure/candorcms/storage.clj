@@ -1,6 +1,5 @@
 (ns candorcms.storage
   "Retrieval of site files stored on the filesystem."
-  (:use candorcms.settings)
   (:import java.io.File
            java.text.SimpleDateFormat))
 
@@ -28,14 +27,13 @@
   [url title template content])
 
 (defn load-pages
-  "Loads all available pages."
+  "Loads all available pages from site-dir."
   [site-dir]
   (let [pages-dir (str site-dir "/pages")]
     (into {} (for [file (.listFiles (File. pages-dir))]
                (let [name (.getName file)
                      simple-name (.substring name 0 (.indexOf name "."))
-                     url (str "/" (if (not (= simple-name index-page))
-                                    simple-name))
+                     url (str "/" simple-name)
                      content (slurp (str pages-dir "/" name))
                      header (extract-header content)
                      header-data (:data header)
@@ -46,7 +44,7 @@
                          (:template header-data) body)])))))
 
 (defn load-templates
-  "Loads all available templates."
+  "Loads all available templates from site-dir."
   [site-dir]
   (let [templates-dir (str site-dir "/templates")]
     (into {} (for [file (.listFiles (File. templates-dir))]
@@ -59,8 +57,9 @@
   [url title date content])
 
 (defn load-articles
-  "Loads all articles for the page."
-  [site-dir page]
+  "Loads all articles for the page from site-dir and formats their dates
+according to date-format."
+  [site-dir page date-format]
   (let [articles-dir (str site-dir "/articles/" page)]
     (into {} (for [file (.listFiles (File. articles-dir))]
                (let [name (.getName file)
