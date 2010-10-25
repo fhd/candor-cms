@@ -41,7 +41,8 @@
                  [(keyword simple-name)
                   (Page. url
                          (:title header-data)
-                         (:template header-data) body)])))))
+                         (:template header-data)
+                         body)])))))
 
 (defn load-templates
   "Loads all available templates from site-dir."

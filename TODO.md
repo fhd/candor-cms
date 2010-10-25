@@ -1,6 +1,5 @@
 0.1
 ===
-* Write unit test cases (TDD or not).
 * Make the page/article comment header optional and define default values.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
