@@ -9,7 +9,7 @@
   (:gen-class
    :extends javax.servlet.http.HttpServlet))
 
-(defn- load-properties
+(defn load-properties
   "Loads all properties from the specified file."
   [file]
   (doto (Properties.)

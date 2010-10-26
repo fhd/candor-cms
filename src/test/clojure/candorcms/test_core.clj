@@ -1,22 +1,59 @@
 (ns candorcms.test-core
   (:use clojure.test
-        candorcms.core))
+        candorcms.core
+        candorcms.storage))
 
 (defrecord Page
     [url title template content])
 
+(defrecord Article
+  [url title date content])
+
 (defn simple-site-fixture [f]
   (binding [load-properties (fn [file] (proxy [java.util.Properties] []
                                          (getProperty [property] " ")))
-            load-pages (fn [site-dir] {:index (Page. "/"
-                                                     "Index"
-                                                     "none"
-                                                     "Hello")})
-            load-templates (fn [site-dir] {:none "{{content}}"})
-            load-articles (fn [site-dir page-name date-format] {})]
-    (f)))
+            load-pages (fn [site-dir]
+                         {:index
+                          (Page. "/" "Index" "none" "Hello, World")
+                          :single-article
+                          (Page. "/single-article" "Single Article" "none"
+                                 "{{#articles}}
+<p><a href=\"{{url}}\">{{title}}</a></p>
+<p>{{date}}</p>
+<p>{{{content}}}</p>{{/articles}}")
+                          :multiple-articles
+                          (Page. "/multiple-articles" "Multiple Articles"
+                                 "none" "{{#articles}}
+<p>{{{content}}}</p>{{/articles}}")})
+            load-templates (fn [site-dir] {:none "{{{content}}}"})
+            load-articles (fn [site-dir page-name date-format]
+                            (case page-name
+                                  "single-article"
+                                  {:article1 (Article. "/" "Article 1"
+                                                       "2010-10-26"
+                                                       "Article One")}
+                                  "multiple-articles"
+                                  {:article1 (Article. "/" "Article 1"
+                                                       "2010-10-26"
+                                                       "Article One")
+                                   :article2 (Article. "/" "Article 2"
+                                                       "2010-10-27"
+                                                       "Article Two")}
+                                  {}))]
+            (f)))
 
 (use-fixtures :once simple-site-fixture)
 
 (deftest test-simple-page
-  (is (= "Hello" (get-page "index"))))
+  (is (= "Hello, World" (get-page "index"))))
+
+(deftest test-single-article
+  (is (= "\n<p><a href=\"/\">Article 1</a></p>
+<p>2010-10-26</p>
+<p>Article One</p>"
+         (get-page "single-article"))))
+
+(deftest test-multiple-articles
+  (is (= "\n<p>Article One</p>
+<p>Article Two</p>"
+         (get-page "multiple-articles"))))
