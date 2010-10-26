@@ -63,7 +63,7 @@ article is shown."
               (let [data {:pages (vec (vals pages))
                           :articles selected-articles
                           :title (:title page)}
-                    content (render (:content page) data)]
+                    content (.trim (render (:content page) data))]
                 (render template (conj data {:content content}))))))))))
 
 (defroutes main-routes

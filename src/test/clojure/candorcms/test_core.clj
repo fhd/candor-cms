@@ -48,12 +48,12 @@
   (is (= "Hello, World" (get-page "index"))))
 
 (deftest test-single-article
-  (is (= "\n<p><a href=\"/\">Article 1</a></p>
+  (is (= "<p><a href=\"/\">Article 1</a></p>
 <p>2010-10-26</p>
 <p>Article One</p>"
          (get-page "single-article"))))
 
 (deftest test-multiple-articles
-  (is (= "\n<p>Article One</p>
+  (is (= "<p>Article One</p>
 <p>Article Two</p>"
          (get-page "multiple-articles"))))
