@@ -23,6 +23,8 @@
 
 Ideas
 =====
+* Create a command-line tool to create "scaffold sites", manage pages,
+  articles etc.
 * Add multi-user support.
 * Add XML-RPC support.
 * Add Git support to the web interface.
