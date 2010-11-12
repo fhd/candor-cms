@@ -33,7 +33,7 @@ Planned features
 ### Web interface
 
 The full functionality of the CMS system will be available through a
-simple web interface.
+simple web interface. I'm currently working on a [prototype](http://github.com/fhd/candor-cms-ui-prototype).
 
 ### Polyglot extensions
 
