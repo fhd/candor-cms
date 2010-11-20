@@ -16,13 +16,13 @@ CMSs that just didn't quite meet my needs.
 Features
 --------
 
-### File-based
+### File-based ###
 
 There is no database, everything is stored in text files on the
 file system. Naturally, these can be edited with a text editor or
 managed by a version control system.
 
-### Established template language
+### Established template language ###
 
 Candor CMS uses the [mustache](http://mustache.github.com/) template
 language - no weird XML dialect.
@@ -30,12 +30,12 @@ language - no weird XML dialect.
 Planned features
 ----------------
 
-### Web interface
+### Web interface ###
 
 The full functionality of the CMS system will be available through a
 simple web interface. I'm currently working on a [prototype](http://github.com/fhd/candor-cms-ui-prototype).
 
-### Polyglot extensions
+### Polyglot extensions ###
 
 I believe in choice, thus it will be possible to extend Candor CMS
 with additional functionality using several dynamic JVM languages. The
@@ -50,20 +50,20 @@ A Candor CMS website consists of pages, templates and articles. The
 system is completely file-based, so each of these are simple files
 placed in respectively named directories.
 
-### Pages
+### Pages ###
 
 All files in the *pages* directory represent distinct pages of the
 website, each mapping to a different URL. These files can either be
 requested by their full name (e.g. http://example.org/index.html) or
 by their basename (e.g. http://example.org/index).
 
-### Templates
+### Templates ###
 
 All files in the *templates* directory provide a way to reuse code
 among pages using the [mustache](http://mustache.github.com/) template
 language.
 
-### Articles
+### Articles ###
 
 All files in the *articles* directory provide a way to add additional
 content to pages. Files are organised into subdirectories, which is
