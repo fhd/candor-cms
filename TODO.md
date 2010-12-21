@@ -2,7 +2,6 @@
 ===
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
-* Deal with trailing slashes in URLs.
 * Add article pagination.
 * Add article archives.
 * Make it possible to define custom 404 pages.

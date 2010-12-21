@@ -69,6 +69,8 @@ article is shown."
 (defroutes main-routes
   (GET "/" [] (get-page "index"))
   (GET "/:page" [page] (get-page page))
-  (GET "/:page/:article" [page article] (get-page page article)))
+  (GET "/:page/" [page] (get-page page))
+  (GET "/:page/:article" [page article] (get-page page article))
+  (GET "/:page/:article/" [page article] (get-page page article)))
 
 (defservice main-routes)
