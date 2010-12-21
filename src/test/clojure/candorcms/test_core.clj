@@ -1,11 +1,8 @@
 (ns candorcms.test-core
   (:use clojure.test
         candorcms.core
-        candorcms.storage))
-
-(defrecord Page [url title template content])
-
-(defrecord Article [url title date content])
+        candorcms.storage)
+  (:import (candorcms.storage Page Article)))
 
 (defn simple-site-fixture [f]
   (binding [load-properties (fn [file] (proxy [java.util.Properties] []
