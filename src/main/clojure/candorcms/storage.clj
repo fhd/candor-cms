@@ -18,9 +18,11 @@
 (defn- extract-header
   "Extracts the header section from the content."
   [content]
-  (let [end (.indexOf content "-->")
-        data (parse-header (.substring content 4 end))]
-    (Header. data (+ end 3))))
+  (let [end (.indexOf content "-->")]
+    (if (> end 0)
+      (let [data (parse-header (.substring content 4 end))]
+        (Header. data (+ end 3)))
+      (Header. {} 0))))
 
 (defrecord Page [url title template content])
 
