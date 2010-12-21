@@ -3,11 +3,9 @@
         candorcms.core
         candorcms.storage))
 
-(defrecord Page
-    [url title template content])
+(defrecord Page [url title template content])
 
-(defrecord Article
-  [url title date content])
+(defrecord Article [url title date content])
 
 (defn simple-site-fixture [f]
   (binding [load-properties (fn [file] (proxy [java.util.Properties] []
@@ -40,7 +38,7 @@
                                                        "2010-10-27"
                                                        "Article Two")}
                                   {}))]
-            (f)))
+    (f)))
 
 (use-fixtures :once simple-site-fixture)
 

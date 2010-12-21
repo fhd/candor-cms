@@ -13,8 +13,7 @@
                      value (aget key-value 1)]
                  [(keyword key) (.trim value)])))))
 
-(defrecord Header
-  [data end])
+(defrecord Header [data end])
 
 (defn- extract-header
   "Extracts the header section from the content."
@@ -23,8 +22,7 @@
         data (parse-header (.substring content 4 end))]
     (Header. data (+ end 3))))
 
-(defrecord Page
-  [url title template content])
+(defrecord Page [url title template content])
 
 (defn load-pages
   "Loads all available pages from site-dir."
@@ -55,7 +53,7 @@
                  [(keyword simple-name) content])))))
 
 (defrecord Article
-  [url title date content])
+    [url title date content])
 
 (defn load-articles
   "Loads all articles for the page from site-dir and formats their dates
