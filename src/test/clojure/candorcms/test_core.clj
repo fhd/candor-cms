@@ -52,3 +52,6 @@
   (is (= "<p>Article One</p>
 <p>Article Two</p>"
          (get-page "multiple-articles"))))
+
+(deftest test-page-not-found
+  (is (= 404 (:status (get-page "doesnt-exist")))))
