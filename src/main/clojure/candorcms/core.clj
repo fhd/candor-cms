@@ -42,8 +42,7 @@
 article is shown."
   [page-name & article-name]
   (let [properties (load-properties "candorcms.properties")
-        site-dir (.getProperty properties "site.dir")
-        date-format (.getProperty properties "date.format")]
+        site-dir (.getProperty properties "site.dir")]
     (if (empty? site-dir)
       (no-site-configured)
       (let [pages (load-pages site-dir)
@@ -52,7 +51,7 @@ article is shown."
           (page-not-found)
           (let [templates (load-templates site-dir)
                 template ((keyword (:template page)) templates)
-                articles (load-articles site-dir page-name date-format)
+                articles (load-articles site-dir page-name)
                 selected-articles (if (nil? article-name)
                                     (vec (sort-by :date (vals articles)))
                                     [((keyword (first article-name))

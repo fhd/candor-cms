@@ -21,7 +21,7 @@
                                  "none" "{{#articles}}
 <p>{{{content}}}</p>{{/articles}}")})
             load-templates (fn [site-dir] {:none "{{{content}}}"})
-            load-articles (fn [site-dir page-name date-format]
+            load-articles (fn [site-dir page-name]
                             (case page-name
                                   "single-article"
                                   {:article1 (Article. "/" "Article 1"

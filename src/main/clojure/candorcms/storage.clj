@@ -1,7 +1,6 @@
 (ns candorcms.storage
   "Retrieval of site files stored on the filesystem."
-  (:import java.io.File
-           java.text.SimpleDateFormat))
+  (:import java.io.File))
 
 (defn- parse-header
   "Parses the header section format into a map."
@@ -58,9 +57,8 @@
     [url title date content])
 
 (defn load-articles
-  "Loads all articles for the page from site-dir and formats their dates
-according to date-format."
-  [site-dir page date-format]
+  "Loads all articles for the page from site-dir."
+  [site-dir page]
   (let [articles-dir (str site-dir "/articles/" page)]
     (into {} (for [file (.listFiles (File. articles-dir))]
                (let [name (.getName file)
@@ -68,12 +66,10 @@ according to date-format."
                      url (str "/" page "/" simple-name)
                      content (slurp (str articles-dir "/" name))
                      header (extract-header content)
-                     date (.lastModified file)
-                     format (SimpleDateFormat. date-format)
-                     date-string (.format format date)
+                     header-data (:data header)
                      body (.trim (.substring content (:end header)))]
                  [(keyword simple-name)
                   (Article. url
-                            (:title (:data header))
-                            date-string
+                            (:title header-data)
+                            (:date header-data)
                             body)])))))

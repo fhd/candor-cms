@@ -1,6 +1,5 @@
 0.1
 ===
-* Read article dates from header instead of file system.
 * Implement Markdown support for articles (identify it based on the
   file extension like GitHub).
 * Add article pagination.
