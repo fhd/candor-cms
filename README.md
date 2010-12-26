@@ -53,9 +53,9 @@ placed in respectively named directories.
 ### Pages ###
 
 All files in the *pages* directory represent distinct pages of the
-website, each mapping to a different URL. These files can either be
-requested by their full name (e.g. http://example.org/index.html) or
-by their basename (e.g. http://example.org/index).
+website, each mapping to a different URL. These files can be
+requested by their basename (without the file extension, e.g.
+http://example.org/index).
 
 ### Templates ###
 
