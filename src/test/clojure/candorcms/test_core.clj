@@ -13,12 +13,14 @@
                           :single-article
                           (Page. "/single-article" "Single Article" "none"
                                  "{{#articles}}
+
 <p><a href=\"{{url}}\">{{title}}</a></p>
 <p>{{date}}</p>
 <p>{{{content}}}</p>{{/articles}}")
                           :multiple-articles
                           (Page. "/multiple-articles" "Multiple Articles"
                                  "none" "{{#articles}}
+
 <p>{{{content}}}</p>{{/articles}}")})
             load-templates (fn [site-dir] {:none "{{{content}}}"})
             load-articles (fn [site-dir page-name]
