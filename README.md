@@ -1,58 +1,36 @@
 Candor CMS
 ==========
 
-A simple web content management system.
-
-It's still in early development. Have a look at the
-[demo](http://github.com/fhd/candor-cms-demo) to see its present
-capabilities.
-
-Candor CMS is heavily inspired by [Radiant](http://radiantcms.org/)
-and [Textpattern](http://textpattern.com/), two simple and powerful
-CMSs that just didn't quite meet my needs.
+A simple file-based content management system, inspired by
+[Radiant](http://radiantcms.org/) and
+[Textpattern](http://textpattern.com/).
 
 Features
 --------
 
 ### File-based ###
 
-There is no database, everything is stored in text files on the
-file system. Naturally, these can be edited with a text editor or
-managed by a version control system.
+There is no database, everything is stored in text files on the file
+system. Naturally, these can be edited with a text editor and managed
+by a version control system.
 
 ### Established template language ###
 
 Candor CMS uses the [mustache](http://mustache.github.com/) template
-language - no weird XML dialect.
-
-Planned features
-----------------
-
-### Web interface ###
-
-The full functionality of the CMS system will be available through a
-simple web interface. I'm currently working on a [prototype](http://github.com/fhd/candor-cms-ui-prototype).
-
-### Polyglot extensions ###
-
-I believe in choice, thus it will be possible to extend Candor CMS
-with additional functionality using several dynamic JVM languages. The
-first stable release will at least support Clojure and Groovy, but in
-the future there will probably be support for Scala, Jython, JRuby
-etc.
+language.
 
 Concepts
 --------
 
 A Candor CMS website consists of pages, templates and articles. The
-system is completely file-based, so each of these are simple files
+system is completely file-based, so each of these are just files
 placed in respectively named directories.
 
 ### Pages ###
 
 All files in the *pages* directory represent distinct pages of the
-website, each mapping to a different URL. These files can be
-requested by their basename (without the file extension, e.g.
+website, each mapping to a different URL. These files can be requested
+by their basename (without the file extension, e.g.
 http://example.org/index).
 
 ### Templates ###
@@ -64,16 +42,15 @@ language.
 ### Articles ###
 
 All files in the *articles* directory provide a way to add additional
-content to pages. Files are organised into subdirectories, which is
+content to pages. Files are organised into subdirectories, which are
 named like the basename of the page where the contained articles
 should appear. Pages and templates can list and display articles.
 
 Building
 --------
 
-Candor CMS sites are stored in the file system, not within the web
-application archive or a database, so the first thing you need to do
-is configure the absolute path to your site in the file
+Candor CMS sites are stored in the file system, so the first thing you
+need to do is configure the absolute path to your site in the file
 *src/main/resources/candorcms.properties*. If you don't have a site
 yet, download the [demo](http://github.com/fhd/candor-cms-demo).
 
@@ -94,7 +71,7 @@ server like [Apache Tomcat](http://tomcat.apache.org/), execute:
 License
 -------
 
-Copyright (C) 2010 Felix H. Dahlke
+Copyright (C) 2012 Felix H. Dahlke
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
