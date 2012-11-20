@@ -11,7 +11,7 @@
          (load-pages simple-site-dir))))
 
 (deftest test-load-templates
-  (is (= {:layout "<html><body>{{{content}}}</body></html>"}
+  (is (= {:layout "<html><body>{{{content}}}</body></html>\n"}
          (load-templates simple-site-dir))))
 
 (deftest test-load-articles
@@ -21,7 +21,7 @@
 
 (deftest test-load-pages-without-header
   (is (= (Page. "/no-header" nil nil "Test")
-         (:no-header (load-pages header-test-site-dir))))) 
+         (:no-header (load-pages header-test-site-dir)))))
 
 (deftest test-load-pages-without-title
   (is (= (Page. "/no-title" nil "layout" "Test")
